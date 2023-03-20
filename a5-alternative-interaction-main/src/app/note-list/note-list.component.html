@@ -5,7 +5,7 @@
     <button type="submit">Add</button>
   </form>
 </div>
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Note</th>
@@ -15,7 +15,7 @@
   <tbody>
     <tr *ngFor="let note of notes">
       <td>{{ note }}</td>
-      <td><button (click)="deleteNote(note)">Delete</button></td>
+      <td><button (click)="deleteNote(note)" type="button" class="btn btn-danger">Delete</button></td>
     </tr>
   </tbody>
 </table>
