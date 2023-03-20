@@ -6,17 +6,22 @@ import { AppComponent } from './app.component';
 import { UiComponent } from './ui/ui.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HandtrackerComponent } from './handtracker/handtracker.component';
+import { NoteListComponent } from './note-list/note-list.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     UiComponent,
     HomePageComponent,
-    HandtrackerComponent
+    HandtrackerComponent,
+    NoteListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,22 @@
+<h2>Notes</h2>
+<div>
+  <form (submit)="addNote()">
+    <input type="text" [(ngModel)]="newNote" placeholder="Enter note">
+    <button type="submit">Add</button>
+  </form>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Note</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let note of notes">
+      <td>{{ note }}</td>
+      <td><button (click)="deleteNote(note)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+
