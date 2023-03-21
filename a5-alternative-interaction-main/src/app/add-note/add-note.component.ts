@@ -38,11 +38,20 @@ export class AddNoteComponent {
     if(gesture === 'Two Hands Pointing'){
       this.toHome();
     }
+    if(gesture === 'Closed Hand'){
+      this.resetInput();
+    }
   }
 
   toHome()
   {
     this.router.navigate([''])
   }
-  
+
+  resetInput(){
+    this.title = '';
+    this.tag = 'Choose tag';
+    this.content = '';
+  }
+
 }

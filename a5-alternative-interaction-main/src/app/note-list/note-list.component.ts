@@ -10,7 +10,8 @@ import {Router} from '@angular/router';
 })
 export class NoteListComponent {
   notes: NoteData[] = JSON.parse(localStorage.getItem('notes') || '[]', NoteData.reviver);
-  loaded:boolean = false;
+  recent: NoteData[] = [];
+  loaded: boolean = false;
 
   constructor(private router: Router) { }
 
@@ -18,6 +19,7 @@ export class NoteListComponent {
     const index = this.notes.indexOf(note);
     if (index !== -1) {
       this.notes.splice(index, 1);
+      this.recent.push(this.notes[0]);
       localStorage.setItem('notes', JSON.stringify(this.notes, NoteData.replacer));
     }
   }
@@ -27,6 +29,7 @@ export class NoteListComponent {
       return;
     }
     this.notes.splice(index, 1);
+    this.recent.push(this.notes[0]);
     localStorage.setItem('notes', JSON.stringify(this.notes, NoteData.replacer));
   }
 
@@ -38,15 +41,37 @@ export class NoteListComponent {
     if(gesture === 'Hand Pointing') {
       this.toAdd();
     }
+    if(gesture === 'one hand closed and one hand open'){
+      this.deleteAll();
+    }
+    if(gesture === 'one hand open and one pointing'){
+      this.undoOne();
+    }
   }
 
   toAdd(){
     this.router.navigate(['/add-note']);
   }
 
+  deleteAll()
+{
+  this.recent=this.recent.concat(this.notes);
+  localStorage.setItem('notes', JSON.stringify(this.notes, NoteData.replacer));
+}
 
-  loading(event: boolean) {
-    this.loaded = event;
+undoOne(){
+  if(this.recent && this.recent.length){
+    let note = this.recent.pop();
+    if(typeof note !== "undefined"){
+      this.notes.push(note);
+      localStorage.setItem('notes', JSON.stringify(this.notes, NoteData.replacer));
+    }
   }
+  
+}
+
+loading(event: boolean) {
+  this.loaded = event;
+}
 }
 
