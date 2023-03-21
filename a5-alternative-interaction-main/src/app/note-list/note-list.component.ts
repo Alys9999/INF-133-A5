@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PredictionEvent } from '../prediction-event';
 
 @Component({
   selector: 'app-note-list',
@@ -22,6 +23,23 @@ export class NoteListComponent {
     if (index !== -1) {
       this.notes.splice(index, 1);
       localStorage.setItem('notes', JSON.stringify(this.notes));
+    }
+  }
+
+  deleteNoteByIndex(index: number) {
+    if(index >= this.notes.length) {
+      return;
+    }
+    this.notes.splice(index, 1);
+    localStorage.setItem('notes', JSON.stringify(this.notes));
+  }
+
+  prediction(event: PredictionEvent) {
+    let gesture = event.getPrediction();
+    if(gesture === 'Two Open Hands') {
+      this.addNote();
+    }else if(gesture === 'Two Closed Hands') {
+      this.deleteNoteByIndex(0);
     }
   }
 }
