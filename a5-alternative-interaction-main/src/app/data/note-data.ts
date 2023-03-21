@@ -1,15 +1,43 @@
+import {nanoid} from 'nanoid';
+
 export class NoteData {
-  static currentId:number = 1;
-  id:number;
-  title:string;
+  id:string;
   date:Date;
+  title:string;
+  tag:string;
   content:string;
 
-  constructor(title:string, date=new Date(), content:string) {
-    this.id = NoteData.currentId;
-    NoteData.currentId++;
+  constructor(title:string, tag:string, content:string) {
+    this.id = nanoid();
+    this.date = new Date();
     this.title = title;
-    this.date = date;
+    this.tag = tag;
     this.content = content;
+  }
+
+  static freeze(instance:NoteData) {
+    return {
+      _class : 'NoteData',
+      id : instance.id,
+      date : instance.date,
+      title : instance.title,
+      tag: instance.tag,
+      content: instance.content
+    }
+  }
+
+  static replacer(key:any, value:any) {
+    return (value instanceof NoteData) ? NoteData.freeze(value) : value;
+  }
+
+  static thaw(instance:any) {
+    return new NoteData(instance.title, instance.tag, instance.content);
+  }
+
+  static reviver(key:any, value:any) {
+    if (value instanceof Object && value._class === 'NoteData') {
+      return NoteData.thaw(value);
+    }
+    return value;
   }
 }

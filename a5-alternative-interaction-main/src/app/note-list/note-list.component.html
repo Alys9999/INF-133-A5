@@ -27,7 +27,7 @@
         </thead>
         <tbody *ngIf="loaded">
           <tr *ngFor="let note of notes">
-            <td>{{ note }}</td>
+            <td>{{ note.content }}</td>
             <td><button (click)="deleteNote(note)" type="button" class="btn btn-danger" placement="end" ngbTooltip="Can also delete first note using Two Closed Hands gesture.">Delete</button></td>
           </tr>
         </tbody>

@@ -1,19 +1,30 @@
 <div class="container text-center">
   <div class="row">
+    <h2>Add Note</h2>
+  </div>
+  <div class="row">
     <div class="col">
-      <form>
-        <div class="mb-3">
-          <label for="title" class="form-label">Title</label>
-          <input type="text" class="form-control" id="title" placeholder="Title Here">
+      <form (submit)="addNote()">
+        <div class="form-floating mb-3">
+          <input type="text" [(ngModel)]="title" name="title" class="form-control" id="title" placeholder="Title">
+          <label for="title">Title</label>
         </div>
-        <div class="mb-3">
-          <label for="content" class="form-label">Content</label>
-          <textarea class="form-control" id="content" rows="3"></textarea>
+        <select class="form-select mb-3" [(ngModel)]="tag" name="tag">
+          <option selected>Choose tag</option>
+          <option value="text-bg-light" class="text-bg-light">Normal</option>
+          <option value="text-bg-danger" class="text-bg-danger">Urgent</option>
+          <option value="text-bg-info" class="text-bg-info">Info</option>
+        </select>
+        <div class="form-floating mb-3">
+          <textarea class="form-control" [(ngModel)]="content" name="content" id="content" placeholder="Content"></textarea>
+          <label for="content">Content</label>
         </div>
+        <button *ngIf="!loaded" class="btn btn-primary disabled">Add</button>
+        <button *ngIf="loaded" class="btn btn-primary">Add</button>
       </form>
     </div>
     <div class="col sticky-top">
-      <app-handtracker></app-handtracker>
+      <app-handtracker (finishedLoading)="loading($event)"></app-handtracker>
     </div>
   </div>
 </div>

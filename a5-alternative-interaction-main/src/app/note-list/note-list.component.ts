@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NoteData } from '../data/note-data';
 import { PredictionEvent } from '../prediction-event';
 
 @Component({
@@ -7,20 +8,23 @@ import { PredictionEvent } from '../prediction-event';
   styleUrls: ['./note-list.component.css']
 })
 export class NoteListComponent {
-  notes: string[] = JSON.parse(localStorage.getItem('notes') || '[]');
+  notes: NoteData[] = JSON.parse(localStorage.getItem('notes') || '[]', NoteData.reviver);
   newNote: string = '';
   loaded:boolean = false;
 
   addNote() {
+    return;
     if (this.newNote) {
-      this.notes.push(this.newNote);
+      //this.notes.push(this.newNote);
       localStorage.setItem('notes', JSON.stringify(this.notes));
       this.newNote = '';
     }
   }
 
-  deleteNote(note: string) {
-    const index = this.notes.indexOf(note);
+  deleteNote(note: NoteData) {
+    return;
+    //const index = this.notes.indexOf(note);
+    let index = 1;
     if (index !== -1) {
       this.notes.splice(index, 1);
       localStorage.setItem('notes', JSON.stringify(this.notes));
@@ -28,6 +32,7 @@ export class NoteListComponent {
   }
 
   deleteNoteByIndex(index: number) {
+    return;
     if(index >= this.notes.length) {
       return;
     }
@@ -36,6 +41,7 @@ export class NoteListComponent {
   }
 
   prediction(event: PredictionEvent) {
+    return;
     let gesture = event.getPrediction();
     if(gesture === 'Two Open Hands') {
       this.addNote();
