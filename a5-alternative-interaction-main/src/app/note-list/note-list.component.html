@@ -2,7 +2,7 @@
 <div>
   <form (submit)="addNote()">
     <input type="text" [(ngModel)]="newNote" placeholder="Enter note" name="note">
-    <button type="submit">Add</button>
+    <button type="submit" placement="end" ngbTooltip="Can also add note using Two Open Hands gesture.">Add</button>
   </form>
 </div>
 <table class="table">
@@ -15,7 +15,7 @@
   <tbody>
     <tr *ngFor="let note of notes">
       <td>{{ note }}</td>
-      <td><button (click)="deleteNote(note)" type="button" class="btn btn-danger">Delete</button></td>
+      <td><button (click)="deleteNote(note)" type="button" class="btn btn-danger" placement="end" ngbTooltip="Can also delete first note using Two Closed Hands gesture.">Delete</button></td>
     </tr>
   </tbody>
 </table>
