@@ -1,25 +1,38 @@
-<h2>Notes</h2>
-<div>
-  <form (submit)="addNote()">
-    <input type="text" [(ngModel)]="newNote" placeholder="Enter note" name="note">
-    <button type="submit" placement="end" ngbTooltip="Can also add note using Two Open Hands gesture.">Add</button>
-  </form>
+<div class="container text-center">
+  <div class="row">
+    <div class="col">
+      <h2>Notes</h2>
+      <form (submit)="addNote()">
+        <input type="text" [(ngModel)]="newNote" placeholder="Enter note" name="note">
+        <button type="submit" placement="end" ngbTooltip="Can also add note using Two Open Hands gesture.">Add</button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Note</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let note of notes">
+            <td>{{ note }}</td>
+            <td><button (click)="deleteNote(note)" type="button" class="btn btn-danger" placement="end" ngbTooltip="Can also delete first note using Two Closed Hands gesture.">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <div class="sticky-top">
+        <app-handtracker (onPrediction)="prediction($event)"></app-handtracker>
+      </div>
+    </div>
+  </div>
 </div>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Note</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let note of notes">
-      <td>{{ note }}</td>
-      <td><button (click)="deleteNote(note)" type="button" class="btn btn-danger" placement="end" ngbTooltip="Can also delete first note using Two Closed Hands gesture.">Delete</button></td>
-    </tr>
-  </tbody>
-</table>
 
 
-<app-handtracker (onPrediction)="prediction($event)"></app-handtracker>
+
 

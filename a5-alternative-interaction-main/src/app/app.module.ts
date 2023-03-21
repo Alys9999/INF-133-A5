@@ -9,6 +9,7 @@ import { HandtrackerComponent } from './handtracker/handtracker.component';
 import { NoteListComponent } from './note-list/note-list.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddNoteComponent } from './add-note/add-note.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UiComponent,
     HomePageComponent,
     HandtrackerComponent,
-    NoteListComponent
+    NoteListComponent,
+    AddNoteComponent
   ],
   imports: [
     BrowserModule,
