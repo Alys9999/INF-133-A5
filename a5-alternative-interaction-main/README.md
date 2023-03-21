@@ -15,7 +15,7 @@
 
 
 3. What online resources did you consult when completing this assignment? (list specific URLs)
-
+- For JSON.parse and JSON.stringify: https://gander.wustl.edu/~wilson/store/yui/docs/json/json-freeze-thaw.html
 
 
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
@@ -23,7 +23,7 @@
 
 
 5. Is there anything special we need to know in order to run your code?
-
+The angular core version is 15.2.3.
 
 
 --Aim for no more than two sentences for each of the following questions.--

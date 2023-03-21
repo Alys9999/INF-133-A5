@@ -38,6 +38,11 @@ export class NoteData {
     if (value instanceof Object && value._class === 'NoteData') {
       return NoteData.thaw(value);
     }
+
     return value;
+  }
+
+  dateString():string {
+    return this.date.toDateString();
   }
 }
