@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NoteData } from '../data/note-data';
 import { PredictionEvent } from '../prediction-event';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-note-list',
@@ -10,6 +11,8 @@ import { PredictionEvent } from '../prediction-event';
 export class NoteListComponent {
   notes: NoteData[] = JSON.parse(localStorage.getItem('notes') || '[]', NoteData.reviver);
   loaded:boolean = false;
+
+  constructor(private router: Router) { }
 
   deleteNote(note: NoteData) {
     const index = this.notes.indexOf(note);
@@ -32,7 +35,15 @@ export class NoteListComponent {
     if(gesture === 'Two Closed Hands') {
       this.deleteNoteByIndex(0);
     }
+    if(gesture === 'Hand Pointing') {
+      this.toAdd();
+    }
   }
+
+  toAdd(){
+    this.router.navigate(['/add-note']);
+  }
+
 
   loading(event: boolean) {
     this.loaded = event;

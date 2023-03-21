@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NoteData } from '../data/note-data';
 import { PredictionEvent } from '../prediction-event';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-note',
@@ -13,6 +14,8 @@ export class AddNoteComponent {
   title:string = '';
   tag:string = 'Choose tag';
   content:string = '';
+
+  constructor(private router: Router) { }
 
   loading(event: boolean) {
     this.loaded = event;
@@ -32,5 +35,14 @@ export class AddNoteComponent {
     if(gesture === 'Two Open Hands') {
       this.addNote();
     }
+    if(gesture === 'Two Hands Pointing'){
+      this.toHome();
+    }
   }
+
+  toHome()
+  {
+    this.router.navigate([''])
+  }
+  
 }
