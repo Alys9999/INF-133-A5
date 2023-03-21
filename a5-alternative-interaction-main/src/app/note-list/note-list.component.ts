@@ -9,6 +9,7 @@ import { PredictionEvent } from '../prediction-event';
 export class NoteListComponent {
   notes: string[] = JSON.parse(localStorage.getItem('notes') || '[]');
   newNote: string = '';
+  loaded:boolean = false;
 
   addNote() {
     if (this.newNote) {
@@ -41,6 +42,10 @@ export class NoteListComponent {
     }else if(gesture === 'Two Closed Hands') {
       this.deleteNoteByIndex(0);
     }
+  }
+
+  loading(event: boolean) {
+    this.loaded = event;
   }
 }
 

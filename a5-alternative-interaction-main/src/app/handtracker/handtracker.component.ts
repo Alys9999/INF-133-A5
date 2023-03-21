@@ -9,6 +9,7 @@ import { PredictionEvent } from '../prediction-event';
 })
 export class HandtrackerComponent implements OnInit {
   @Output() onPrediction = new EventEmitter<PredictionEvent>();
+  @Output() finishedLoading = new EventEmitter<boolean>(false);
   @ViewChild('htvideo') video: ElementRef;
   
   /* 
@@ -17,7 +18,7 @@ export class HandtrackerComponent implements OnInit {
   or slower rates
   */
   SAMPLERATE: number = 500; 
-  
+ 
   detectedGesture:string = "None"
   width:string = "400"
   height:string = "400"
@@ -39,6 +40,7 @@ export class HandtrackerComponent implements OnInit {
   ngOnInit(): void{
     handTrack.load(this.modelParams).then((lmodel: any) =>{
         this.model = lmodel;
+        this.finishedLoading.emit(true);
         console.log("loaded");
     });
   }

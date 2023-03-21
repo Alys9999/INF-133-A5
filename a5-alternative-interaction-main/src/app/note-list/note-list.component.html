@@ -2,10 +2,18 @@
   <div class="row">
     <div class="col">
       <h2>Notes</h2>
-      <form (submit)="addNote()">
-        <input type="text" [(ngModel)]="newNote" placeholder="Enter note" name="note">
-        <button type="submit" placement="end" ngbTooltip="Can also add note using Two Open Hands gesture.">Add</button>
-      </form>
+      <div *ngIf="loaded">
+        <form (submit)="addNote()">
+          <input type="text" [(ngModel)]="newNote" placeholder="Enter note" name="note">
+          <button type="submit" placement="end" ngbTooltip="Can also add note using Two Open Hands gesture.">Add</button>
+        </form>
+      </div>
+      <div aria-hidden="true" *ngIf="!loaded">
+        <form class="placeholder-glow">
+          <input type="text" class="placeholder">
+          <button class="btn placeholder">Add</button>
+        </form>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -17,17 +25,23 @@
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="loaded">
           <tr *ngFor="let note of notes">
             <td>{{ note }}</td>
             <td><button (click)="deleteNote(note)" type="button" class="btn btn-danger" placement="end" ngbTooltip="Can also delete first note using Two Closed Hands gesture.">Delete</button></td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="!loaded && notes.length > 0">
+          <tr class="placeholder-glow">
+            <td><span class="placeholder col-7"></span></td>
+            <td><button class="btn btn-danger disabled placeholder col-3"></button></td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="col">
       <div class="sticky-top">
-        <app-handtracker (onPrediction)="prediction($event)"></app-handtracker>
+        <app-handtracker (onPrediction)="prediction($event)" (finishedLoading)="loading($event)"></app-handtracker>
       </div>
     </div>
   </div>
