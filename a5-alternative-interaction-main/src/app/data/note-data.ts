@@ -45,4 +45,10 @@ export class NoteData {
   dateString():string {
     return this.date.toDateString();
   }
+
+  setNewValues(title:string, tag:string, content:string) {
+    this.title = title;
+    this.tag = tag;
+    this.content = content;
+  }
 }

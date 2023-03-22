@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddNoteComponent } from './add-note/add-note.component';
 import { ToastsComponent } from './toasts/toasts.component';
+import { EditNoteComponent } from './edit-note/edit-note.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ToastsComponent } from './toasts/toasts.component';
     HandtrackerComponent,
     NoteListComponent,
     AddNoteComponent,
-    ToastsComponent
+    ToastsComponent,
+    EditNoteComponent
   ],
   imports: [
     BrowserModule,

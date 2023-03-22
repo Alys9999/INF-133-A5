@@ -41,7 +41,7 @@ export class NoteListComponent {
     if(gesture === 'Two Closed Hands') {
       this.deleteNoteByIndex(0);
     }
-    if(gesture === 'Hand Pointing') {
+    if(gesture === 'Hand Pinching') {
       this.toAdd();
     }
     if(gesture === 'One Closed Hand and One Open Hand'){
@@ -54,6 +54,10 @@ export class NoteListComponent {
 
   toAdd(){
     this.router.navigate(['/add-note']);
+  }
+
+  toEditNote(id:string) {
+    this.router.navigate(['/edit-note/'+id]);
   }
 
   deleteAll() {
