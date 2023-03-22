@@ -30,7 +30,7 @@ export class NoteListComponent {
     if(index >= this.notes.length) {
       return;
     }
-    this.showSuccess('Successfully deleted note in positon' + (index+1).toString() + "!");
+    this.showSuccess('Successfully deleted note in positon ' + (index+1).toString() + "!");
     this.recent.push(this.notes[index]);
     this.notes.splice(index, 1);
     localStorage.setItem('notes', JSON.stringify(this.notes, NoteData.replacer));

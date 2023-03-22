@@ -101,10 +101,6 @@ export class HandtrackerComponent implements OnInit {
 
             // These are just a few options! What about one hand open and one hand closed!?
 
-            //delete the first one
-            if (openhands==1 && closedhands==1) this.detectedGesture = "One Closed Hand and One Open Hand";
-            //undoOne
-            if (openhands==1 && pointing ==1) this.detectedGesture = "One Open Hand and One Hand Pointing";
             
             //addnote action
             if (openhands > 1) this.detectedGesture = "Two Open Hands";
@@ -122,6 +118,11 @@ export class HandtrackerComponent implements OnInit {
             if (pinching > 1) this.detectedGesture = "Two Hands Pinching";
             //go to add note
             else if(pinching == 1) this.detectedGesture = "Hand Pinching";
+
+            //delete the first one
+            if (openhands == 1 && closedhands == 1) this.detectedGesture = "One Closed Hand and One Open Hand";
+            //undoOne
+            if (openhands == 1 && pointing == 1) this.detectedGesture = "One Open Hand and One Hand Pointing";
 
             if (openhands == 0 && closedhands == 0 && pointing == 0 && pinching == 0)
                 this.detectedGesture = "None";
