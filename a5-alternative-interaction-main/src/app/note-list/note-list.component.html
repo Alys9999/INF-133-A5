@@ -11,7 +11,7 @@
     </div>
     <div class="col text-start">
       <button *ngIf="!loaded" class="btn btn-danger disabled placeholder col-2"></button>
-      <button *ngIf="loaded" (click)="deleteAll()" class="btn btn-danger" placement="end" ngbTooltip="Can also delete all using One Closed Hand and One Open Hand gesture.">Delete All</button>
+      <button *ngIf="loaded" (click)="deleteAll()" class="btn btn-danger" placement="end" ngbTooltip="Can also delete all using Two Closed Hands gesture.">Delete All</button>
     </div>
   </div>
   <div class="row">
@@ -21,7 +21,7 @@
           <h5 class="card-title">{{note.title}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{note.dateString()}}</h6>
           <p class="card-text">{{note.content}}</p>
-          <button (click)="deleteNote(note)" type="button" class="btn btn-warning" placement="end" ngbTooltip="Can also delete first note using Two Closed Hands gesture.">Delete</button>
+          <button (click)="deleteNote(note)" type="button" class="btn btn-warning" placement="end" ngbTooltip="Can also delete first note using One Closed Hand and One Open Hand gesture.">Delete</button>
         </div>
       </div>
     </div>
