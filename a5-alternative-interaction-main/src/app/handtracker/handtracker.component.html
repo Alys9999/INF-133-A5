@@ -1,6 +1,6 @@
 <video id="htvideo" #htvideo name="htvideo" class="videobox" autoplay="autoplay"></video>
 <div>
-<button (click)="startDetection()">Start</button>
-<button (click)="stopDetection()">Stop</button>
+<button (click)="startDetection()" class="btn btn-success me-3">Start</button>
+<button (click)="stopDetection()" class="btn btn-danger me-3">Stop</button>
 </div>
 <div [innerHTML]="detectedGesture"></div>

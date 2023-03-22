@@ -10,6 +10,7 @@ import { NoteListComponent } from './note-list/note-list.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddNoteComponent } from './add-note/add-note.component';
+import { ToastsComponent } from './toasts/toasts.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AddNoteComponent } from './add-note/add-note.component';
     HomePageComponent,
     HandtrackerComponent,
     NoteListComponent,
-    AddNoteComponent
+    AddNoteComponent,
+    ToastsComponent
   ],
   imports: [
     BrowserModule,

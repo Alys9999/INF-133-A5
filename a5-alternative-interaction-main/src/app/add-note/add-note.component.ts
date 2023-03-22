@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NoteData } from '../data/note-data';
 import { PredictionEvent } from '../prediction-event';
 import {Router} from '@angular/router';
+import { ToastService } from '../toast.service';
 
 @Component({
   selector: 'app-add-note',
@@ -12,22 +13,23 @@ export class AddNoteComponent {
   loaded:boolean = false;
   notes:NoteData[] = JSON.parse(localStorage.getItem('notes') || '[]', NoteData.reviver)
   title:string = '';
-  tag:string = 'Choose tag';
+  tag:string = 'text-bg-light';
   content:string = '';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private toastService:ToastService) { }
 
   loading(event: boolean) {
     this.loaded = event;
   }
 
   addNote() {
+    if(!this.checkValidity()) {
+      return;
+    }
     let note = new NoteData(this.title, this.tag, this.content);
     this.notes.push(note);
     localStorage.setItem('notes', JSON.stringify(this.notes, NoteData.replacer));
-    this.title = '';
-    this.tag = 'Choose tag';
-    this.content = '';
+    this.resetInput();
   }
 
   prediction(event: PredictionEvent) {
@@ -50,8 +52,25 @@ export class AddNoteComponent {
 
   resetInput(){
     this.title = '';
-    this.tag = 'Choose tag';
+    this.tag = 'text-bg-light';
     this.content = '';
+  }
+
+  checkValidity() {
+    if(this.title === '' || this.content === '') {
+      this.showWarning();
+      return false;
+    }
+    this.showSucces();
+    return true;
+  }
+
+  showWarning() {
+    this.toastService.show("bg-warning text-light", "Missing Input", "All input fields needs to be filled!", 5000);
+  }
+
+  showSucces() {
+    this.toastService.show('bg-success text-light','Success', 'Successfully added note!', 3000);
   }
 
 }

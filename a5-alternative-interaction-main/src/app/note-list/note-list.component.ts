@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NoteData } from '../data/note-data';
 import { PredictionEvent } from '../prediction-event';
 import {Router} from '@angular/router';
+import { ToastService } from '../toast.service';
 
 @Component({
   selector: 'app-note-list',
@@ -13,13 +14,14 @@ export class NoteListComponent {
   recent: NoteData[] = [];
   loaded: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private toastService:ToastService) { }
 
   deleteNote(note: NoteData) {
     const index = this.notes.indexOf(note);
     if (index !== -1) {
+      this.showSuccess('Successfully deleted note!');
+      this.recent.push(note)
       this.notes.splice(index, 1);
-      this.recent.push(this.notes[0]);
       localStorage.setItem('notes', JSON.stringify(this.notes, NoteData.replacer));
     }
   }
@@ -28,8 +30,9 @@ export class NoteListComponent {
     if(index >= this.notes.length) {
       return;
     }
+    this.showSuccess('Successfully deleted note in positon' + (index+1).toString() + "!");
+    this.recent.push(this.notes[index]);
     this.notes.splice(index, 1);
-    this.recent.push(this.notes[0]);
     localStorage.setItem('notes', JSON.stringify(this.notes, NoteData.replacer));
   }
 
@@ -41,10 +44,10 @@ export class NoteListComponent {
     if(gesture === 'Hand Pointing') {
       this.toAdd();
     }
-    if(gesture === 'one hand closed and one hand open'){
+    if(gesture === 'One Closed Hand and One Open Hand'){
       this.deleteAll();
     }
-    if(gesture === 'one hand open and one pointing'){
+    if(gesture === 'One Open Hand and One Hand Pointing'){
       this.undoOne();
     }
   }
@@ -53,21 +56,37 @@ export class NoteListComponent {
     this.router.navigate(['/add-note']);
   }
 
-  deleteAll()
-{
-  this.recent=this.recent.concat(this.notes);
-  localStorage.setItem('notes', JSON.stringify(this.notes, NoteData.replacer));
+  deleteAll() {
+    if(this.notes.length === 0) {
+      this.showWarning('Missing Notes to Delete', 'No notes remaining to Delete All!');
+      return;
+    }
+    this.showSuccess('Successfully deleted all notes!');
+    this.recent=this.recent.concat(this.notes);
+    this.notes = [];
+    localStorage.setItem('notes', JSON.stringify(this.notes, NoteData.replacer));
 }
 
 undoOne(){
   if(this.recent && this.recent.length){
+    this.showSuccess('Successfully undid one delete!');
     let note = this.recent.pop();
     if(typeof note !== "undefined"){
       this.notes.push(note);
       localStorage.setItem('notes', JSON.stringify(this.notes, NoteData.replacer));
     }
+  } else {
+    this.showWarning('Missing Previous Deleted Note', 'No recent deletes to undo!');
   }
   
+}
+
+showWarning(header:string, body:string) {
+  this.toastService.show('bg-warning text-light', header, body);
+}
+
+showSuccess(body:string) {
+  this.toastService.show('bg-success text-light', 'Success', body, 3000);
 }
 
 loading(event: boolean) {

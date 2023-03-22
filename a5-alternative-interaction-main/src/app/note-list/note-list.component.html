@@ -4,9 +4,19 @@
       <h2>Notes</h2>
     </div>
   </div>
+  <div class="row mb-3">
+    <div class="col text-end">
+      <button *ngIf="!loaded" class="btn btn-primary disabled placeholder col-3"></button>
+      <button *ngIf="loaded" (click)="undoOne()" class="btn btn-primary" placement="start" ngbTooltip="Can also undo using One Open Hand and One Hand Pointing gesture.">Undo One Delete</button>
+    </div>
+    <div class="col text-start">
+      <button *ngIf="!loaded" class="btn btn-danger disabled placeholder col-2"></button>
+      <button *ngIf="loaded" (click)="deleteAll()" class="btn btn-danger" placement="end" ngbTooltip="Can also delete all using One Closed Hand and One Open Hand gesture.">Delete All</button>
+    </div>
+  </div>
   <div class="row">
     <div class="col" *ngIf="loaded">
-      <div *ngFor="let note of notes" class="card {{note.tag}}">
+      <div *ngFor="let note of notes" class="card {{note.tag}} mb-3">
         <div class="card-body">
           <h5 class="card-title">{{note.title}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{note.dateString()}}</h6>
