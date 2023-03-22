@@ -38,13 +38,13 @@ export class NoteListComponent {
 
   prediction(event: PredictionEvent) {
     let gesture = event.getPrediction();
-    if(gesture === 'Two Closed Hands') {
+    if(gesture === 'One Closed Hand and One Open Hand') {
       this.deleteNoteByIndex(0);
     }
     if(gesture === 'Hand Pointing') {
       this.toAdd();
     }
-    if(gesture === 'One Closed Hand and One Open Hand'){
+    if(gesture === 'Two Closed Hands'){
       this.deleteAll();
     }
     if(gesture === 'One Open Hand and One Hand Pointing'){
